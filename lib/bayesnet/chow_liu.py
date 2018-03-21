@@ -12,12 +12,13 @@ connected graph. This is the Chow-Liu tree.
 
 __author__ = """Xiaopeng LI <xlibo@connect.ust.hk>"""
 
-from .utils import mutual_information, mutual_information_binary
+from .utils import mutual_information, mutual_information_binary, mutual_information_binary_dataset
 # from .utils import mutual_information_fast
 from .bayesnet import BayesNet
 import operator
 import numpy as np
 import scipy.io
+from ..utils import TextDataset
 
 def chow_liu(data, directed=False, binary=True):
     """
@@ -45,8 +46,8 @@ def chow_liu(data, directed=False, binary=True):
     -----
 
     """
-    value_dict = dict(zip(range(data.shape[1]),
-        [list(np.unique(col)) for col in data.T]))
+    # value_dict = dict(zip(range(data.shape[1]),
+    #     [list(np.unique(col)) for col in data.T]))
 
     n_rv = data.shape[1]
     print("===> Number of variables: %d" % n_rv)
@@ -54,7 +55,10 @@ def chow_liu(data, directed=False, binary=True):
     print("===> Computing pairwise mutual_information...")
     
     if binary:
-        edge_list = mutual_information_binary(data)
+        if isinstance(data, TextDataset):
+            edge_list = mutual_information_binary_dataset(data)
+        else:    
+            edge_list = mutual_information_binary(data)
     else:
         edge_list = []
         for i in range(n_rv):

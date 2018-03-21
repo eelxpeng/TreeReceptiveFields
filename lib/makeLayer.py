@@ -14,7 +14,7 @@ import os.path
 import pickle
 import sys
 
-from lib.utils import readData
+from lib.utils import readData, TextDataset
 from lib.genMask import genMask, genMaskMIIslands
 from lib.maskedDAE import MaskedDenoisingAutoencoder
 from lib.maskedDAEwithFC import MaskedDenoisingAutoencoderFC
@@ -54,7 +54,10 @@ def makeLayerMaskedDAEFC(data_x, valid_x, corrupt=0.5, kernel_size=3, stride=2, 
     # else:
     #     mask = genMask(data_x.cpu().numpy(), kernel_size=kernel_size, stride=stride)
     #     pickle.dump(mask, open(maskfile, "wb"))
-    mask = genMask(data_x.cpu().numpy(), kernel_size=kernel_size, stride=stride)
+    if isinstance(data_x, TextDataset):
+        mask = genMask(data_x, kernel_size=kernel_size, stride=stride)    
+    else:
+        mask = genMask(data_x.cpu().numpy(), kernel_size=kernel_size, stride=stride)
     infeatures, outfeatures = mask.shape
     print("Layer hidden units: %d, Density: %f" % (outfeatures, 1.0*np.sum(mask)/(mask.shape[0]*mask.shape[1])))
     mask = torch.from_numpy(mask.astype(np.float32).T)

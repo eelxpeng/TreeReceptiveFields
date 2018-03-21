@@ -16,7 +16,7 @@ from sklearn.metrics import roc_auc_score
 import time
 
 from lib.Tox21_Data import Dataset, read
-from lib.utils import readData
+from lib.utils import readData, TextDataset
 from lib.treeConvNetFC import TreeConvNetFC
 from lib.maskedDAEwithFC import MaskedDenoisingAutoencoderFC
 
@@ -125,18 +125,25 @@ print("fcwidths: ", fcwidths)
 start_time = time.time()
 num_classes = len(label_name)
 randgen = np.random.RandomState(13)
-trainX, trainY = readData(training_file, training_num, vocab_size, randgen)
-validX, validY = readData(valid_file, valid_num, vocab_size)
-testX, testY = readData(test_file, test_num, vocab_size)
+# trainX, trainY = readData(training_file, training_num, vocab_size, randgen)
+# validX, validY = readData(valid_file, valid_num, vocab_size)
+# testX, testY = readData(test_file, test_num, vocab_size)
+trainset = TextDataset(training_file, training_num, vocab_size, randgen)
+validset = TextDataset(valid_file, valid_num, vocab_size)
+testset = TextDataset(test_file, test_num, vocab_size)
+
 end_time = time.time()
 print("reading data cost: ", end_time - start_time)
 
-input_dim = trainX.size()[1]
+# input_dim = trainX.size()[1]
+input_dim = trainset.shape[1]
 
 net = TreeConvNetFC(args.name)
 
 start_time = time.time()
-net.learn_structure(trainX, validX, num_classes, kernel_stride, fcwidths, corrupt=0.5,
+# net.learn_structure(trainX, validX, num_classes, kernel_stride, fcwidths, corrupt=0.5,
+#         lr=1e-3, batch_size=args.batch_size, epochs=10)
+net.learn_structure(trainset, validset, num_classes, kernel_stride, fcwidths, corrupt=0.5,
         lr=1e-3, batch_size=args.batch_size, epochs=10)
 end_time = time.time()
 print("learning structure cost: ", end_time - start_time)
@@ -149,7 +156,9 @@ print("learning structure cost: ", end_time - start_time)
 #         l.p = 0.5
 
 start_time = time.time()
-net.fit(trainX, trainY, validX, validY, testX, testY, batch_size=args.batch_size,
+# net.fit(trainX, trainY, validX, validY, testX, testY, batch_size=args.batch_size,
+#     lr=args.lr, epochs=args.epochs)
+net.fit(trainset, validset, testset, batch_size=args.batch_size,
     lr=args.lr, epochs=args.epochs)
 end_time = time.time()
 print("finetuning cost: ", end_time - start_time)

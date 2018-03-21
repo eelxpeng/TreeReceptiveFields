@@ -6,6 +6,7 @@ from torch.optim.lr_scheduler import LambdaLR, StepLR
 import torchvision
 from torchvision import datasets, transforms
 from torch.autograd import Variable
+import torch.utils.data as data
 
 import numpy as np
 import scipy.io
@@ -54,13 +55,18 @@ class TreeConvNetFC:
             os.mkdir('checkpoint')
         torch.save(self.net, './checkpoint/ckpt-'+self.name+'-structure.t7')
 
-    def fit(self, trainX, trainY, validX, validY, testX, testY,
+    def fit(self, trainset, validset, testset,
         batch_size=256, lr=0.01, epochs=10, anneal="lambda", weight_decay=0):
         print("=========Classify============")
         use_cuda = torch.cuda.is_available()
-        trainset = Dataset(trainX, trainY)
-        validset = Dataset(validX, validY)
-        testset = Dataset(testX, testY)
+        # if isinstance(trainX, data.Dataset):
+        #     trainset = trainX
+        #     validset = validX
+        #     testset = testX
+        # else:
+        #     trainset = Dataset(trainX, trainY)
+        #     validset = Dataset(validX, validY)
+        #     testset = Dataset(testX, testY)
         trainloader = torch.utils.data.DataLoader(
             trainset, batch_size=batch_size, shuffle=True, num_workers=2)
         validloader = torch.utils.data.DataLoader(

@@ -7,6 +7,7 @@ from lib.bayesnet.discretize import discretize
 from lib.bayesnet.chow_liu import chow_liu
 from lib.bayesnet.tree_conv import tree_conv
 from lib.bayesnet.miislands import miislands
+from .utils import TextDataset
 
 # def genMask(data, todiscretize=True, bins=5, kernel_size=1, stride=1):
 #     """
@@ -49,7 +50,8 @@ def genMask(data, thresh=0, kernel_size=1, stride=1):
                     Each element is dxh 0-1 matrix
     """
     n, d = data.shape
-    data = (data>thresh).astype(np.int8)
+    if not isinstance(data, TextDataset):
+        data = (data>thresh).astype(np.int8)
     mst = chow_liu(data)
     with open("mst.pkl", "wb") as f:
         pickle.dump(mst, f)

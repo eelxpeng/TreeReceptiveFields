@@ -50,6 +50,45 @@ class Dataset(data.Dataset):
     def __len__(self):
         return len(self.data)
 
+class TextDataset(data.Dataset):
+    def __init__(self, filename, data_num, vocab_size, randgen=None):
+        if randgen != None:
+            print('Reading data with permutation from %s\n' % filename)
+            idx = randgen.permutation(data_num)
+        else:
+            print('Reading data without permutation from %s\n' % filename)
+            idx = range(data_num)
+
+        # read text file
+        self.data = [None]*data_num
+        self.labels = torch.LongTensor(data_num) *0
+        self.vocab_size = vocab_size
+        count = 0
+        for line in open(filename):
+            line = line.strip('\n').split(',')
+            self.labels[ idx[count] ] = int(line[0])
+            entry_list = [(int(listed_pair[0]), int(listed_pair[1])) for listed_pair in [pair.split(':') for pair in line[1:]]]
+            self.data[ idx[count] ] = entry_list
+            count += 1
+
+        # self.shape = (len(self.data), self.vocab_size)
+
+    def __getitem__(self, index):
+        entry_list, target = self.data[index], self.labels[index]
+        dataX = torch.FloatTensor(self.vocab_size) *0
+        entry_tensor = torch.LongTensor(entry_list)
+        dataX[entry_tensor[:,0]] = entry_tensor[:,1].type(torch.FloatTensor)
+
+        return dataX, target
+
+    def __len__(self):
+        return len(self.data)
+
+    @property
+    def shape(self):
+        return len(self.data), self.vocab_size
+
+
 def readData(filename, data_num, vocab_size, randgen=None):
     dataX = torch.FloatTensor(data_num, vocab_size) *0
     dataY = torch.LongTensor(data_num) *0

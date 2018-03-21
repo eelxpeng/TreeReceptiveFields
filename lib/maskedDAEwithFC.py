@@ -6,6 +6,7 @@ import torch.optim as optim
 import torchvision
 from torchvision import datasets, transforms
 from torch.autograd import Variable
+import torch.utils.data as data
 
 import torch.nn.init as init
 
@@ -67,7 +68,10 @@ class MaskedDenoisingAutoencoderFC(nn.Module):
 
     def encodeBatch(self, x, batch_size=256):
         use_cuda = torch.cuda.is_available()
-        dataset = Dataset(x, x)
+        if isinstance(data_x, data.Dataset):
+            dataset = x
+        else:
+            dataset = Dataset(x, x)
         dataloader = torch.utils.data.DataLoader(
             dataset, batch_size=batch_size, shuffle=False, num_workers=2)
         
@@ -127,10 +131,17 @@ class MaskedDenoisingAutoencoderFC(nn.Module):
             criterion = MSELoss()
         elif loss_type=="cross-entropy":
             criterion = BCELoss()
-        trainset = Dataset(data_x, data_x)
+
+        if isinstance(data_x, data.Dataset):
+            trainset = data_x
+        else:
+            trainset = Dataset(data_x, data_x)
         trainloader = torch.utils.data.DataLoader(
             trainset, batch_size=batch_size, shuffle=True, num_workers=2)
-        validset = Dataset(valid_x, valid_x)
+        if isinstance(valid_x, data.Dataset):
+            validset = valid_x
+        else:
+            validset = Dataset(valid_x, valid_x)
         validloader = torch.utils.data.DataLoader(
             validset, batch_size=1000, shuffle=False, num_workers=2)
 
