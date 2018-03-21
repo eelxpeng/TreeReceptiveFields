@@ -1,0 +1,4 @@
+Running Dataset agnews with [lr=0.001000, epochs=50, batch_size=256]
+kernel_stride:  [(11, 10), (5, 2), (5, 2)]
+Reading data with permutation from dataset/agnews_training_110K_10K-TFIDF-words.txt
+
