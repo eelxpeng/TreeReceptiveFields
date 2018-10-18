@@ -44,3 +44,218 @@ Loss:  mse
 #Epoch   7: Reconstruct Loss: 22.563, Valid Reconstruct Loss: 14.469
 #Epoch   8: Reconstruct Loss: 21.750, Valid Reconstruct Loss: 14.247
 #Epoch   9: Reconstruct Loss: 22.768, Valid Reconstruct Loss: 14.249
+Generating layer units...
+===> Number of variables: 2191
+===> Computing pairwise mutual_information...
+Computing single and joint counts...
+MI computed for 1000 variables...
+MI computed for 2000 variables...
+===> Number of considerred edges: 2399145
+===> Running Kruskal's algorithm...
+===> Done. Maximum Spanning Tree Generated.
+===> Running tree_conv to generate neiborhoods...
+===> Mask generated.
+Layer hidden units: 557, Density: 0.017044
+=====Denoising Autoencoding layer=======
+Loss:  mse
+#Epoch 0: Valid Reconstruct Loss: 14.865
+#Epoch   0: Reconstruct Loss: 8.465, Valid Reconstruct Loss: 7.851
+#Epoch   1: Reconstruct Loss: 8.721, Valid Reconstruct Loss: 7.328
+#Epoch   2: Reconstruct Loss: 8.790, Valid Reconstruct Loss: 6.922
+#Epoch   3: Reconstruct Loss: 8.184, Valid Reconstruct Loss: 6.652
+#Epoch   4: Reconstruct Loss: 8.582, Valid Reconstruct Loss: 6.503
+#Epoch   5: Reconstruct Loss: 7.807, Valid Reconstruct Loss: 6.551
+#Epoch   6: Reconstruct Loss: 8.425, Valid Reconstruct Loss: 6.496
+#Epoch   7: Reconstruct Loss: 8.636, Valid Reconstruct Loss: 6.609
+#Epoch   8: Reconstruct Loss: 8.130, Valid Reconstruct Loss: 6.475
+#Epoch   9: Reconstruct Loss: 8.113, Valid Reconstruct Loss: 6.420
+Generating layer units...
+===> Number of variables: 607
+===> Computing pairwise mutual_information...
+Computing single and joint counts...
+===> Number of considerred edges: 183921
+===> Running Kruskal's algorithm...
+===> Done. Maximum Spanning Tree Generated.
+===> Running tree_conv to generate neiborhoods...
+===> Mask generated.
+Layer hidden units: 284, Density: 0.042230
+=====Denoising Autoencoding layer=======
+Loss:  mse
+#Epoch 0: Valid Reconstruct Loss: 12.594
+#Epoch   0: Reconstruct Loss: 4.885, Valid Reconstruct Loss: 5.568
+#Epoch   1: Reconstruct Loss: 6.006, Valid Reconstruct Loss: 5.013
+#Epoch   2: Reconstruct Loss: 5.624, Valid Reconstruct Loss: 4.848
+#Epoch   3: Reconstruct Loss: 5.202, Valid Reconstruct Loss: 5.034
+#Epoch   4: Reconstruct Loss: 5.332, Valid Reconstruct Loss: 4.629
+#Epoch   5: Reconstruct Loss: 4.826, Valid Reconstruct Loss: 4.545
+#Epoch   6: Reconstruct Loss: 5.111, Valid Reconstruct Loss: 4.538
+#Epoch   7: Reconstruct Loss: 4.973, Valid Reconstruct Loss: 4.571
+#Epoch   8: Reconstruct Loss: 5.132, Valid Reconstruct Loss: 4.428
+#Epoch   9: Reconstruct Loss: 5.565, Valid Reconstruct Loss: 4.474
+learning structure cost:  2586.2585310935974
+=========Classify============
+Sequential(
+  (0): MaskedDenoisingAutoencoderFC sparse (10000 -> 2091), fc (10000 -> 100)
+  (1): MaskedDenoisingAutoencoderFC sparse (2191 -> 557), fc (2191 -> 50)
+  (2): MaskedDenoisingAutoencoderFC sparse (607 -> 284), fc (607 -> 25)
+  (3): Linear(in_features=309, out_features=4, bias=True)
+)
+#Epoch   0: Train Loss: 0.418 | Acc: 86.955%
+#Epoch   0: Test Loss: 0.252 | Acc: 91.770%
+#Epoch   0: Test Loss: 0.263 | Acc: 91.461%
+Saving..
+#Epoch   1: Train Loss: 0.241 | Acc: 92.555%
+#Epoch   1: Test Loss: 0.242 | Acc: 91.970%
+#Epoch   1: Test Loss: 0.255 | Acc: 91.724%
+Saving..
+#Epoch   2: Train Loss: 0.200 | Acc: 93.735%
+#Epoch   2: Test Loss: 0.242 | Acc: 91.920%
+#Epoch   2: Test Loss: 0.256 | Acc: 91.908%
+#Epoch   3: Train Loss: 0.171 | Acc: 94.611%
+#Epoch   3: Test Loss: 0.249 | Acc: 91.980%
+#Epoch   3: Test Loss: 0.264 | Acc: 91.921%
+Saving..
+#Epoch   4: Train Loss: 0.149 | Acc: 95.298%
+#Epoch   4: Test Loss: 0.262 | Acc: 91.900%
+#Epoch   4: Test Loss: 0.278 | Acc: 91.803%
+#Epoch   5: Train Loss: 0.131 | Acc: 95.821%
+#Epoch   5: Test Loss: 0.272 | Acc: 92.000%
+#Epoch   5: Test Loss: 0.288 | Acc: 92.000%
+Saving..
+#Epoch   6: Train Loss: 0.114 | Acc: 96.269%
+#Epoch   6: Test Loss: 0.291 | Acc: 92.030%
+#Epoch   6: Test Loss: 0.311 | Acc: 91.816%
+Saving..
+#Epoch   7: Train Loss: 0.103 | Acc: 96.677%
+#Epoch   7: Test Loss: 0.312 | Acc: 91.970%
+#Epoch   7: Test Loss: 0.330 | Acc: 91.816%
+#Epoch   8: Train Loss: 0.093 | Acc: 97.016%
+#Epoch   8: Test Loss: 0.323 | Acc: 91.900%
+#Epoch   8: Test Loss: 0.341 | Acc: 91.803%
+#Epoch   9: Train Loss: 0.083 | Acc: 97.300%
+#Epoch   9: Test Loss: 0.334 | Acc: 92.020%
+#Epoch   9: Test Loss: 0.355 | Acc: 91.697%
+#Epoch  10: Train Loss: 0.076 | Acc: 97.499%
+#Epoch  10: Test Loss: 0.357 | Acc: 91.740%
+#Epoch  10: Test Loss: 0.379 | Acc: 91.737%
+#Epoch  11: Train Loss: 0.068 | Acc: 97.777%
+#Epoch  11: Test Loss: 0.371 | Acc: 91.700%
+#Epoch  11: Test Loss: 0.393 | Acc: 91.487%
+#Epoch  12: Train Loss: 0.063 | Acc: 97.938%
+#Epoch  12: Test Loss: 0.386 | Acc: 91.660%
+#Epoch  12: Test Loss: 0.411 | Acc: 91.526%
+#Epoch  13: Train Loss: 0.059 | Acc: 98.073%
+#Epoch  13: Test Loss: 0.400 | Acc: 91.660%
+#Epoch  13: Test Loss: 0.423 | Acc: 91.395%
+#Epoch  14: Train Loss: 0.053 | Acc: 98.227%
+#Epoch  14: Test Loss: 0.421 | Acc: 91.740%
+#Epoch  14: Test Loss: 0.441 | Acc: 91.447%
+#Epoch  15: Train Loss: 0.049 | Acc: 98.337%
+#Epoch  15: Test Loss: 0.438 | Acc: 91.810%
+#Epoch  15: Test Loss: 0.461 | Acc: 91.434%
+#Epoch  16: Train Loss: 0.046 | Acc: 98.435%
+#Epoch  16: Test Loss: 0.469 | Acc: 91.670%
+#Epoch  16: Test Loss: 0.493 | Acc: 91.408%
+#Epoch  17: Train Loss: 0.044 | Acc: 98.499%
+#Epoch  17: Test Loss: 0.471 | Acc: 91.700%
+#Epoch  17: Test Loss: 0.496 | Acc: 91.395%
+#Epoch  18: Train Loss: 0.040 | Acc: 98.679%
+#Epoch  18: Test Loss: 0.480 | Acc: 91.600%
+#Epoch  18: Test Loss: 0.509 | Acc: 91.382%
+#Epoch  19: Train Loss: 0.037 | Acc: 98.773%
+#Epoch  19: Test Loss: 0.510 | Acc: 91.700%
+#Epoch  19: Test Loss: 0.536 | Acc: 91.434%
+#Epoch  20: Train Loss: 0.036 | Acc: 98.769%
+#Epoch  20: Test Loss: 0.514 | Acc: 91.580%
+#Epoch  20: Test Loss: 0.545 | Acc: 91.382%
+#Epoch  21: Train Loss: 0.032 | Acc: 98.891%
+#Epoch  21: Test Loss: 0.548 | Acc: 91.530%
+#Epoch  21: Test Loss: 0.576 | Acc: 91.368%
+#Epoch  22: Train Loss: 0.033 | Acc: 98.905%
+#Epoch  22: Test Loss: 0.548 | Acc: 91.570%
+#Epoch  22: Test Loss: 0.577 | Acc: 91.395%
+#Epoch  23: Train Loss: 0.030 | Acc: 98.990%
+#Epoch  23: Test Loss: 0.560 | Acc: 91.540%
+#Epoch  23: Test Loss: 0.590 | Acc: 91.355%
+#Epoch  24: Train Loss: 0.028 | Acc: 99.069%
+#Epoch  24: Test Loss: 0.585 | Acc: 91.500%
+#Epoch  24: Test Loss: 0.609 | Acc: 91.434%
+#Epoch  25: Train Loss: 0.026 | Acc: 99.137%
+#Epoch  25: Test Loss: 0.603 | Acc: 91.590%
+#Epoch  25: Test Loss: 0.629 | Acc: 91.382%
+#Epoch  26: Train Loss: 0.027 | Acc: 99.088%
+#Epoch  26: Test Loss: 0.603 | Acc: 91.510%
+#Epoch  26: Test Loss: 0.634 | Acc: 91.303%
+#Epoch  27: Train Loss: 0.025 | Acc: 99.178%
+#Epoch  27: Test Loss: 0.626 | Acc: 91.380%
+#Epoch  27: Test Loss: 0.653 | Acc: 91.355%
+#Epoch  28: Train Loss: 0.025 | Acc: 99.173%
+#Epoch  28: Test Loss: 0.626 | Acc: 91.490%
+#Epoch  28: Test Loss: 0.656 | Acc: 91.382%
+#Epoch  29: Train Loss: 0.023 | Acc: 99.246%
+#Epoch  29: Test Loss: 0.640 | Acc: 91.450%
+#Epoch  29: Test Loss: 0.671 | Acc: 91.421%
+#Epoch  30: Train Loss: 0.023 | Acc: 99.226%
+#Epoch  30: Test Loss: 0.648 | Acc: 91.490%
+#Epoch  30: Test Loss: 0.677 | Acc: 91.250%
+#Epoch  31: Train Loss: 0.021 | Acc: 99.287%
+#Epoch  31: Test Loss: 0.667 | Acc: 91.390%
+#Epoch  31: Test Loss: 0.698 | Acc: 91.158%
+#Epoch  32: Train Loss: 0.021 | Acc: 99.295%
+#Epoch  32: Test Loss: 0.671 | Acc: 91.450%
+#Epoch  32: Test Loss: 0.703 | Acc: 91.145%
+#Epoch  33: Train Loss: 0.020 | Acc: 99.322%
+#Epoch  33: Test Loss: 0.685 | Acc: 91.510%
+#Epoch  33: Test Loss: 0.716 | Acc: 91.276%
+#Epoch  34: Train Loss: 0.020 | Acc: 99.351%
+#Epoch  34: Test Loss: 0.695 | Acc: 91.400%
+#Epoch  34: Test Loss: 0.721 | Acc: 91.303%
+#Epoch  35: Train Loss: 0.019 | Acc: 99.334%
+#Epoch  35: Test Loss: 0.697 | Acc: 91.440%
+#Epoch  35: Test Loss: 0.726 | Acc: 91.382%
+#Epoch  36: Train Loss: 0.017 | Acc: 99.410%
+#Epoch  36: Test Loss: 0.726 | Acc: 91.390%
+#Epoch  36: Test Loss: 0.756 | Acc: 91.276%
+#Epoch  37: Train Loss: 0.017 | Acc: 99.430%
+#Epoch  37: Test Loss: 0.738 | Acc: 91.350%
+#Epoch  37: Test Loss: 0.765 | Acc: 91.342%
+#Epoch  38: Train Loss: 0.016 | Acc: 99.434%
+#Epoch  38: Test Loss: 0.755 | Acc: 91.370%
+#Epoch  38: Test Loss: 0.780 | Acc: 91.355%
+#Epoch  39: Train Loss: 0.017 | Acc: 99.462%
+#Epoch  39: Test Loss: 0.752 | Acc: 91.340%
+#Epoch  39: Test Loss: 0.779 | Acc: 91.329%
+#Epoch  40: Train Loss: 0.016 | Acc: 99.445%
+#Epoch  40: Test Loss: 0.760 | Acc: 91.360%
+#Epoch  40: Test Loss: 0.788 | Acc: 91.197%
+#Epoch  41: Train Loss: 0.015 | Acc: 99.506%
+#Epoch  41: Test Loss: 0.774 | Acc: 91.330%
+#Epoch  41: Test Loss: 0.801 | Acc: 91.289%
+#Epoch  42: Train Loss: 0.015 | Acc: 99.484%
+#Epoch  42: Test Loss: 0.788 | Acc: 91.380%
+#Epoch  42: Test Loss: 0.818 | Acc: 91.342%
+#Epoch  43: Train Loss: 0.013 | Acc: 99.554%
+#Epoch  43: Test Loss: 0.806 | Acc: 91.430%
+#Epoch  43: Test Loss: 0.834 | Acc: 91.368%
+#Epoch  44: Train Loss: 0.013 | Acc: 99.541%
+#Epoch  44: Test Loss: 0.819 | Acc: 91.420%
+#Epoch  44: Test Loss: 0.843 | Acc: 91.368%
+#Epoch  45: Train Loss: 0.013 | Acc: 99.560%
+#Epoch  45: Test Loss: 0.830 | Acc: 91.340%
+#Epoch  45: Test Loss: 0.852 | Acc: 91.211%
+#Epoch  46: Train Loss: 0.013 | Acc: 99.562%
+#Epoch  46: Test Loss: 0.838 | Acc: 91.360%
+#Epoch  46: Test Loss: 0.861 | Acc: 91.145%
+#Epoch  47: Train Loss: 0.013 | Acc: 99.576%
+#Epoch  47: Test Loss: 0.843 | Acc: 91.440%
+#Epoch  47: Test Loss: 0.867 | Acc: 91.197%
+#Epoch  48: Train Loss: 0.013 | Acc: 99.585%
+#Epoch  48: Test Loss: 0.848 | Acc: 91.400%
+#Epoch  48: Test Loss: 0.874 | Acc: 91.158%
+#Epoch  49: Train Loss: 0.013 | Acc: 99.603%
+#Epoch  49: Test Loss: 0.852 | Acc: 91.350%
+#Epoch  49: Test Loss: 0.872 | Acc: 91.184%
+
+Best Valid ACC=92.030, test ACC=91.816
+finetuning cost:  537.1779873371124
+Done.
