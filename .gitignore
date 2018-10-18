@@ -1,24 +1,11 @@
 # ignore datasets
-**/dataset
-data
-checkpoint
-model
-maskVisual
-reference
-visual
-
-# ignore useless
-**/..nfs*
-**/.nfs*
-**/.core.*
+# **/dataset
 
 # ignore .pyc
 *.pyc
 .DS_Store
 
 # ignore results/
-*/results/*
-*/output/*
 
 # ignore jar file
 *.jar
