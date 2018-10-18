@@ -7,14 +7,18 @@ Xiaopeng Li*, Zhourong Chen* and Nevin L. Zhang. Building Sparse Deep Feedforwar
 ## Environment Requirements
 
 *python3.6
+
 *pytorch>=0.4.0
+
 *numpy
+
 *scipy
+
 *sklearn
 
 ## Running
 
-The dataset for Agnews is put under `dataset/' for demo. To run the program with Agnews dataset, simply run
+The dataset for Agnews is put under `dataset/` for demo. To run the program with Agnews dataset, simply run
 
 ```console
 bash run-test_treeconvfc-agnews.qsub.sh
