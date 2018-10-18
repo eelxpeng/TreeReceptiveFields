@@ -160,7 +160,7 @@ class MaskedDenoisingAutoencoderFC(nn.Module):
                 outputs = F.sigmoid(outputs)
 
             valid_recon_loss = criterion(outputs, inputs)
-            total_loss += valid_recon_loss.data[0] * inputs.size()[0]
+            total_loss += valid_recon_loss.data * inputs.size()[0]
             total_num += inputs.size()[0]
 
         valid_loss = total_loss / total_num
@@ -203,7 +203,7 @@ class MaskedDenoisingAutoencoderFC(nn.Module):
                     outputs = F.sigmoid(outputs)
 
                 valid_recon_loss = criterion(outputs, inputs)
-                total_loss += valid_recon_loss.data[0] * inputs.size()[0]
+                total_loss += valid_recon_loss.data * inputs.size()[0]
                 total_num += inputs.size()[0]
 
             valid_loss = total_loss / total_num

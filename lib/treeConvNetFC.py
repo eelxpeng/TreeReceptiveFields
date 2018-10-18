@@ -84,28 +84,28 @@ class TreeConvNetFC:
         elif anneal=="step":
             scheduler = StepLR(optimizer, step_size=5, gamma=0.5)
         criterion = nn.CrossEntropyLoss()
-        best_valid_acc = 0  # best test accuracy
-        best_test_acc = 0
+        best_valid_acc = 0.  # best test accuracy
+        best_test_acc = 0.
 
         def test(net, epoch, dataloader):
             net.eval()
-            test_loss = 0
-            correct = 0
-            total = 0
+            test_loss = 0.
+            correct = 0.
+            total = 0.
 
             for batch_idx, (inputs, targets) in enumerate(dataloader):
                 if use_cuda:
                     inputs, targets = inputs.cuda(), targets.cuda()
-                inputs, targets = Variable(inputs, volatile=True), Variable(targets)
+                inputs, targets = Variable(inputs), Variable(targets)
                 outputs = net(inputs)
                 loss = criterion(outputs, targets)
 
-                test_loss += loss.data[0]
+                test_loss += loss.data
                 total += targets.size(0)
                 _, predicted = torch.max(outputs.data, 1)
                 correct += (predicted == targets.data).sum()
 
-            acc = 100.*correct/total
+            acc = 100.*correct.float()/total
             print("#Epoch %3d: Test Loss: %.3f | Acc: %.3f%%" % (epoch, test_loss/(batch_idx+1), 
                 acc))
             
@@ -113,9 +113,9 @@ class TreeConvNetFC:
 
         def train(net, epoch):
             net.train()
-            train_loss = 0
-            correct = 0
-            total = 0
+            train_loss = 0.
+            correct = 0.
+            total = 0.
 
             for batch_idx, (inputs, targets) in enumerate(trainloader):
                 if use_cuda:
@@ -127,13 +127,13 @@ class TreeConvNetFC:
                 loss.backward()
                 optimizer.step()
 
-                train_loss += loss.data[0]
+                train_loss += loss.data
                 total += targets.size(0)
                 _, predicted = torch.max(outputs.data, 1)
                 correct += (predicted == targets.data).sum()
 
             print("#Epoch %3d: Train Loss: %.3f | Acc: %.3f%%" % (epoch, train_loss/(batch_idx+1),
-                                            100.*correct/total))
+                                            100.*correct.float()/total))
 
         for epoch in range(epochs):
             scheduler.step()

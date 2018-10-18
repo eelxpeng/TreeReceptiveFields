@@ -1,5 +1,6 @@
 # ignore datasets
 # **/dataset
+checkpoint/
 
 # ignore .pyc
 *.pyc
