@@ -17,9 +17,10 @@ import sys
 import pickle
 from sklearn.metrics import roc_auc_score
 from sklearn import preprocessing
+import time
 
-from lib.Tox21_Data import Dataset, read
-from lib.utils import readData
+from lib.Tox21_Data import read
+from lib.utils import readData, Dataset
 from lib.treeConvNetFC import TreeConvNetFC
 from lib.maskedDAE import MaskedDenoisingAutoencoder
 
@@ -170,8 +171,11 @@ binary_thresh = torch.from_numpy(np.mean(trainX.numpy(), axis=0, keepdims=True))
 trainX = trainX - binary_thresh
 validX = validX - binary_thresh
 
+start_time = time.time()
 net.learn_structure(trainX, validX, num_classes, kernel_stride, fcwidths, corrupt=0.5,
         lr=1e-3, batch_size=args.batch_size, epochs=10)
+end_time = time.time()
+print("learning structure cost: ", end_time - start_time)
 
 # net.net = torch.load('./checkpoint/ckpt-'+args.name+'-structure.t7')
 # use skeleton only, initialize weight randomly
@@ -192,8 +196,12 @@ for target in range(12):
     validX = validX - binary_thresh
     testX = testX - binary_thresh
 
+    start_time = time.time()
     valid_auc, test_auc = fit(net.net, trainX, trainY, validX, validY, testX, testY, batch_size=args.batch_size,
                                 lr=args.lr, epochs=args.epochs, name=args.name+"-"+str(target))
+    end_time = time.time()
+    print("finetuning cost: ", end_time - start_time)
+
     valid_aucs.append(valid_auc)
     test_aucs.append(test_auc)
 

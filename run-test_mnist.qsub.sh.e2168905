@@ -1,4 +1,0 @@
-Traceback (most recent call last):
-  File "test_mnist.py", line 83, in <module>
-    print("#Epoch %3d: Reconstruct Loss: %.3f" % (epoch, recon_loss.data.cpu()))
-TypeError: must be real number, not torch.FloatTensor

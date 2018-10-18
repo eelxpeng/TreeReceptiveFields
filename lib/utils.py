@@ -13,6 +13,7 @@ import torch.nn as nn
 import torch.nn.init as init
 import torch.utils.data as data
 from PIL import Image
+import pdb
 
 import logging
 
@@ -67,7 +68,7 @@ class TextDataset(data.Dataset):
         for line in open(filename):
             line = line.strip('\n').split(',')
             self.labels[ idx[count] ] = int(line[0])
-            entry_list = [(int(listed_pair[0]), int(listed_pair[1])) for listed_pair in [pair.split(':') for pair in line[1:]]]
+            entry_list = [[int(listed_pair[0]), int(listed_pair[1])] for listed_pair in [pair.split(':') for pair in line[1:]]]
             self.data[ idx[count] ] = entry_list
             count += 1
 
@@ -75,9 +76,10 @@ class TextDataset(data.Dataset):
 
     def __getitem__(self, index):
         entry_list, target = self.data[index], self.labels[index]
-        dataX = torch.FloatTensor(self.vocab_size) *0
+        dataX = torch.zeros(self.vocab_size).type(torch.FloatTensor)
         entry_tensor = torch.LongTensor(entry_list)
-        dataX[entry_tensor[:,0]] = entry_tensor[:,1].type(torch.FloatTensor)
+        if len(entry_list)!=0:
+            dataX[entry_tensor[:,0]] = entry_tensor[:,1].type(torch.FloatTensor)
 
         return dataX, target
 

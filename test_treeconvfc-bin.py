@@ -13,11 +13,13 @@ import os
 import sys
 import pickle
 from sklearn.metrics import roc_auc_score
+import time
 
 from lib.Tox21_Data import Dataset, read
 from lib.utils import readData
 from lib.treeConvNetFC import TreeConvNetFC
 from lib.maskedDAEwithFC import MaskedDenoisingAutoencoderFC
+from lib.utils import Dataset
 
 # Training settings
 parser = argparse.ArgumentParser(description='PyTorch MNIST Example')
@@ -112,16 +114,21 @@ elif args.dataset=="yahoo":
     kernel_stride = [(6, 5), (5, 4), (5, 2)]
     fcwidths = [100, 50, 25]
 
+
 print("Running Dataset %s with [lr=%f, epochs=%d, batch_size=%d]"
         % (args.dataset, args.lr, args.epochs, args.batch_size))
 print("kernel_stride: ", kernel_stride)
 print("fcwidths: ", fcwidths)
 
+start_time = time.time()
 num_classes = len(label_name)
 randgen = np.random.RandomState(13)
 trainX, trainY = readData(training_file, training_num, vocab_size, randgen)
 validX, validY = readData(valid_file, valid_num, vocab_size)
 testX, testY = readData(test_file, test_num, vocab_size)
+
+end_time = time.time()
+print("reading data cost: ", end_time - start_time)
 
 # preprocess, normalize each dimension to be [0, 1] for cross-entropy loss
 train_max = torch.max(trainX, dim=0, keepdim=True)[0]
@@ -135,12 +142,19 @@ trainX.div_(x_max)
 validX.div_(x_max)
 testX.div_(x_max)
 
+trainset = Dataset(trainX, trainY)
+validset = Dataset(validX, validY)
+testset = Dataset(testX, testY)
+
 input_dim = trainX.size()[1]
 
 net = TreeConvNetFC(args.name)
 
+start_time = time.time()
 net.learn_structure(trainX, validX, num_classes, kernel_stride, fcwidths, corrupt=0.5,
         lr=1e-3, batch_size=args.batch_size, epochs=10, loss_type="cross-entropy")
+end_time = time.time()
+print("learning structure cost: ", end_time - start_time)
 # net.net = torch.load('./checkpoint/ckpt-'+args.name+'-structure.t7')
 # use skeleton only, initialize weight randomly
 # for l in net.net:
@@ -149,6 +163,9 @@ net.learn_structure(trainX, validX, num_classes, kernel_stride, fcwidths, corrup
 #     if isinstance(l, nn.Dropout):
 #         l.p = 0.5
 
-net.fit(trainX, trainY, validX, validY, testX, testY, batch_size=args.batch_size,
+start_time = time.time()
+net.fit(trainset, validset, testset, batch_size=args.batch_size,
     lr=args.lr, epochs=args.epochs)
+end_time = time.time()
+print("finetuning cost: ", end_time - start_time)
 print("Done.")

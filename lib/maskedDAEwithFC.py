@@ -9,11 +9,11 @@ from torch.autograd import Variable
 import torch.utils.data as data
 
 import torch.nn.init as init
-
 import numpy as np
 import math
 from lib.utils import Dataset, readData
 from lib.ops import MSELoss, BCELoss
+import pdb
 
 def masking_noise(data, frac):
     """
@@ -68,7 +68,7 @@ class MaskedDenoisingAutoencoderFC(nn.Module):
 
     def encodeBatch(self, x, batch_size=256):
         use_cuda = torch.cuda.is_available()
-        if isinstance(data_x, data.Dataset):
+        if isinstance(x, data.Dataset):
             dataset = x
         else:
             dataset = Dataset(x, x)
@@ -118,6 +118,7 @@ class MaskedDenoisingAutoencoderFC(nn.Module):
         data_x: FloatTensor
         valid_x: FloatTensor
         """
+        # pdb.set_trace()
         use_cuda = torch.cuda.is_available()
         if use_cuda:
             self.cuda()
