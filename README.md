@@ -6,15 +6,15 @@ Xiaopeng Li*, Zhourong Chen* and Nevin L. Zhang. Building Sparse Deep Feedforwar
 
 ## Environment Requirements
 
-*python3.6
+* python3.6
 
-*pytorch>=0.4.0
+* pytorch>=0.4.0
 
-*numpy
+* numpy
 
-*scipy
+* scipy
 
-*sklearn
+* sklearn
 
 ## Running
 
